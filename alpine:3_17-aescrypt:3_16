@@ -35,6 +35,4 @@ WORKDIR /
 COPY ./example.sh /example.sh
 RUN chmod +x /example.sh
 
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
-
-CMD [ "sleep", "infinity" ]
+ENTRYPOINT [ "/./example.sh"]
