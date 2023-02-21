@@ -1,5 +1,6 @@
 That is docker image with aescrypt installed in alpine
-for use just start container and you see example commands for aescrypt
+for use just start container and you see example commands for aescrypt:
+
   `docker run --rm joulkope/aescrypt`
   
 example usage:
