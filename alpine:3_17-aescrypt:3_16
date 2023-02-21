@@ -1,0 +1,40 @@
+FROM alpine:3.17
+
+#ENV setup
+ENV BUILD_DIR=/.build
+ENV AESCRYPT_VERSION=3.16
+ENV AESCrypt_INSTALLER=aescrypt-${AESCRYPT_VERSION}
+ENV AESCrypt_INSTALLER_TGZ=${AESCrypt_INSTALLER}.tgz
+
+RUN mkdir ${BUILD_DIR}
+
+WORKDIR ${BUILD_DIR}
+
+# Install dependencies
+RUN apk update \
+    && apk add --no-cache wget 
+
+# Download aescypt binary
+RUN wget https://www.aescrypt.com/download/v3/linux/${AESCrypt_INSTALLER_TGZ}
+
+    # Install aescrypt
+RUN tar -xzf ${AESCrypt_INSTALLER_TGZ} \ 
+    && cd ${AESCrypt_INSTALLER} \
+    && apk add --no-cache wget make g++ \
+    && make \
+    && cd src \
+    && make install \
+    # Clean image
+    && cd / \
+    && rm -rf ${BUILD_DIR} \
+    && apk del g++ make wget \
+    && rm -rf /var/cache/apk/*  \
+    && rm -rf /tmp/*
+WORKDIR /
+
+COPY ./example.sh /example.sh
+RUN chmod +x /example.sh
+
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+CMD [ "sleep", "infinity" ]
