@@ -30,9 +30,7 @@ RUN tar -xzf ${AESCrypt_INSTALLER_TGZ} \
     && apk del g++ make wget \
     && rm -rf /var/cache/apk/*  \
     && rm -rf /tmp/*
-WORKDIR /
+WORKDIR /mnt
 
 COPY ./example.sh /example.sh
 RUN chmod +x /example.sh
-
-ENTRYPOINT [ "/./example.sh"]
