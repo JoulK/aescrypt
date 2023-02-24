@@ -1,8 +1,13 @@
 That is docker image with aescrypt installed in alpine
-for use just start container and you see example commands for aescrypt:
 
-  `docker run --rm joulkope/aescrypt:alpine-3.16`
-  
-example usage:
+example usage to encrypt|decrypt file in current directory:
 
-  `docker run --rm -it -v /path/host:/path/container --env-file ./env_with_pass joulkope/aescrypt:alpine-3.16 aescrypt -e|d -p $FILE_PASSWORD /path/container/file`
+`
+echo FILE_PASSWORD=*YOUR_PASSWORD_HERE* > .env
+`
+
+`
+docker run --rm -it -v $(pwd):/mnt/ --env-file .env joulkope/aescrypt:alpine-3.16 aescrypt -e|d -p $FILE_PASSWORD ./file_name
+`
+
+for more usage parameters you can checkout dev site: https://www.aescrypt.com/linux_aes_crypt.html
