@@ -12,7 +12,7 @@ WORKDIR ${BUILD_DIR}
 
 # Install dependencies
 RUN apk update \
-    && apk add --no-cache wget 
+    && apk add --no-cache wget
 
 # Download aescypt binary
 RUN wget https://www.aescrypt.com/download/v3/linux/${AESCrypt_INSTALLER_TGZ}
@@ -20,7 +20,7 @@ RUN wget https://www.aescrypt.com/download/v3/linux/${AESCrypt_INSTALLER_TGZ}
     # Install aescrypt
 RUN tar -xzf ${AESCrypt_INSTALLER_TGZ} \ 
     && cd ${AESCrypt_INSTALLER} \
-    && apk add --no-cache wget make g++ \
+    && apk add --no-cache make g++ \
     && make \
     && cd src \
     && make install \
